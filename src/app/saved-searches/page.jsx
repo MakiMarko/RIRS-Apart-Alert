@@ -198,6 +198,13 @@ export default function SavedSearchesPage() {
                   >
                     Izbriši
                   </button>
+                  <a
+                    href={`/listings?location=${encodeURIComponent(s.location || '')}&priceMin=${s.priceMin || ''}&priceMax=${s.priceMax || ''}`}
+                    className="border px-3 py-1 rounded text-sm hover:bg-white/10"
+                  >
+                    Poglej rezultate
+                  </a>
+
                 </div>
               </li>
             ))}

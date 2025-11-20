@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";       // ⬅️ Dodano
-import Nav from "./components/Nav";        // ⬅️ Dodano
+import Nav from "./components/Nav";
+import Providers from "./providers"; // če nimaš te datoteke, ta import odstrani
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,18 +15,22 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "Apart Alert",
-  description: "Agilni projekt za RIRS",
+  description: "Iskanje apartmajev z obvestili in shranjenimi iskanji",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="sl">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-zinc-950 text-zinc-50 antialiased`}
       >
         <Providers>
-          <Nav />         {/* ⬅️ Prikaz navigacije z login/logout */}
-          {children}
+          <div className="min-h-screen flex flex-col">
+            <Nav />
+            <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>

@@ -1,39 +1,64 @@
-'use client';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Home() {
-  const { data: session } = useSession();
-
   return (
-    <main className="max-w-2xl mx-auto p-6 space-y-4">
-      <h1 className="text-3xl font-bold mb-4">Apart Alert</h1>
+    <section className="space-y-8">
+      <div className="space-y-3">
+        <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">
+          Apart Alert – shranjena iskanja in obveščanje o oglasih
+        </h1>
+        <p className="text-zinc-400 max-w-xl">
+          Ustvari shranjeno iskanje, filtriraj oglase po svojih kriterijih in
+          izberi, katero iskanje je trenutno aktivno.  
+          Ta prototip prikazuje glavne funkcionalnosti aplikacije.
+        </p>
+      </div>
 
-      {!session ? (
-        <div className="space-y-3">
-          <p className="opacity-80">
-            Dobrodošel! Za uporabo aplikacije se prosim prijavi ali registriraj.
-          </p>
-          <div className="space-x-4">
-            <Link href="/register" className="underline">
-              Ustvari račun
-            </Link>
-            <Link href="/login" className="underline">
-              Prijava
-            </Link>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <Link
+          href="/saved-searches"
+          className="border border-zinc-800 rounded-xl p-4 hover:border-zinc-500 hover:bg-zinc-900/40 transition flex flex-col justify-between"
+        >
+          <div>
+            <h2 className="font-medium mb-1">Shranjena iskanja</h2>
+            <p className="text-sm text-zinc-400">
+              Dodaj, uredi ali aktiviraj iskanja (lokacija, cena, datumi…)
+            </p>
           </div>
-        </div>
-      ) : (
-        <div>
-          <p className="opacity-80 mb-3">
-            Prijavljen kot: <b>{session.user?.email}</b>
-          </p>
-          <p>
-            Zdaj lahko začneš uporabljati funkcionalnosti aplikacije – npr.
-            shranjevanje iskanj, opozorila o novih apartmajih itd.
-          </p>
-        </div>
-      )}
-    </main>
+          <span className="mt-3 text-xs text-zinc-300">Pojdi na iskanja →</span>
+        </Link>
+
+        <Link
+          href="/listings"
+          className="border border-zinc-800 rounded-xl p-4 hover:border-zinc-500 hover:bg-zinc-900/40 transition flex flex-col justify-between"
+        >
+          <div>
+            <h2 className="font-medium mb-1">Seznam oglasov</h2>
+            <p className="text-sm text-zinc-400">
+              Poglej mock oglase, filtriraj, sortiaj in naloži več rezultatov.
+            </p>
+          </div>
+          <span className="mt-3 text-xs text-zinc-300">Poglej oglase →</span>
+        </Link>
+
+        <Link
+          href="/login"
+          className="border border-zinc-800 rounded-xl p-4 hover:border-zinc-500 hover:bg-zinc-900/40 transition flex flex-col justify-between"
+        >
+          <div>
+            <h2 className="font-medium mb-1">Prijava / registracija</h2>
+            <p className="text-sm text-zinc-400">
+              Uporabnik se prijavi z emailom in geslom in nato začne z uporabo.
+            </p>
+          </div>
+          <span className="mt-3 text-xs text-zinc-300">Prijavi se →</span>
+        </Link>
+      </div>
+
+      <p className="text-xs text-zinc-500">
+        * Funkcionalnosti so implementirane za potrebe seminarske naloge (mock
+        podatki, SQLite baza, Next.js + Prisma + NextAuth).
+      </p>
+    </section>
   );
 }
